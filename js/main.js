@@ -1,35 +1,33 @@
 (() => {
-  console.log("IIFE Fired");
-
   // variables
-  const charactors = document.querySelector("#charactors");
+  const characters = document.querySelector("#characters");
   const movieBox = document.querySelector("#movieBox");
   const movieCon = document.querySelector("#movie-con");
   const baseUrl = "https://swapi.dev/api/people/?format=json";
 
   // functions
-  function getcharactors() {
+  function getcharacters() {
     fetch(`${baseUrl}`)
       .then((response) => response.json())
       .then(function (response) {
         const results = response.results; //  assuming the API response has a 'results' property
         const ul = document.createElement("ul");
 
-        results.forEach((charactor) => {
+        results.forEach((character) => {
           const li = document.createElement("li");
           const a = document.createElement("a");
 
-          a.textContent = charactor.name; // replace with actual property names
-          a.dataset.movies = charactor.films;
+          a.textContent = character.name; // replace with actual property names
+          a.dataset.movies = character.films;
 
           li.appendChild(a);
           ul.appendChild(li);
         });
 
-        charactors.appendChild(ul); // append the list to the charactors element
+        characters.appendChild(ul); // append the list to the characters element
       })
       .then(function () {
-        const links = document.querySelectorAll("#charactors li a");
+        const links = document.querySelectorAll("#characters li a");
         links.forEach((link) => {
           link.addEventListener("click", getMovies);
         });
@@ -54,6 +52,6 @@
     });
   }
 
-  getcharactors();
+  getcharacters();
   // eventListener
 })();
