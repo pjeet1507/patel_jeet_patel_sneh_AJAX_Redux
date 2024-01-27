@@ -1,0 +1,27 @@
+#movieBox {
+    margin-top: 20px;
+    border-left: solid red 2px;
+    padding-left: 10px;
+
+    img {
+        width: 300px;
+
+    }
+
+    #movie-con {
+        padding: 5px;
+
+        .movie {
+            margin-top: 10px;
+            padding-top: 5px;
+            border: white solid 2px;
+            border-radius: 5px;
+            padding: 5px;
+            display: flex;
+
+            .movie-heading {
+                padding: 10px;
+            }
+        }
+    }
+}

@@ -16,10 +16,15 @@
         results.forEach((character) => {
           const li = document.createElement("li");
           const a = document.createElement("a");
+          const img = document.createElement("img");
 
           a.textContent = character.name; // replace with actual property names
           a.dataset.movies = character.films;
 
+          img.src = `images/${character.name}.jpg`; // Example: 'Luke Skywalker' becomes 'lukeskywalker.jpeg'
+          img.alt = character.name;
+          img.className = "character-image"; // You can define a CSS class for styling
+          a.appendChild(img);
           li.appendChild(a);
           ul.appendChild(li);
         });
@@ -77,8 +82,6 @@
 
     return movieElement;
   }
-
-
 
   getcharacters();
   // eventListener
