@@ -39,18 +39,46 @@
 
   function getMovies(e) {
     const filmURLs = e.currentTarget.dataset.movies.split(",");
+    movieCon.innerHTML = ""; // Clear existing content
 
     filmURLs.forEach((filmUrl) => {
       fetch(filmUrl)
         .then((response) => response.json())
         .then((filmDetail) => {
-          console.log(filmDetail); // process each film's details here
+          const movieElement = createMovieElement(filmDetail);
+          movieCon.appendChild(movieElement);
         })
         .catch((error) => {
           console.error("Error fetching film details:", error);
         });
     });
   }
+
+  function createMovieElement(movie) {
+    const movieElement = document.createElement("div");
+    movieElement.className = "movie";
+
+    const movieTitle = document.createElement("h2");
+    movieTitle.className = "movie-heading";
+    movieTitle.textContent = movie["title"];
+
+    const movieImage = document.createElement("img");
+    movieImage.className = "poster-image";
+    movieImage.src = `images/${movie["episode_id"]}.jpeg`;
+    movieImage.alt = movie["#title"];
+
+    const movieDescription = document.createElement("p");
+    movieDescription.className = "movie-description";
+    movieDescription.innerHTML = movie["opening_crawl"];
+
+    movieElement.appendChild(movieTitle);
+    movieElement.appendChild(movieImage);
+    movieElement.appendChild(movieDescription);
+
+    return movieElement;
+  }
+
+
 
   getcharacters();
   // eventListener
