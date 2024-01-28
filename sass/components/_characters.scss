@@ -11,6 +11,7 @@
     word-spacing: 5px;
     box-shadow: 0 0 20px 6px white;
 
+
     ul {
         list-style-type: none;
         padding: 0;
@@ -21,6 +22,7 @@
             font-size: x-large;
             position: relative;
             border-bottom: solid rgb(37, 37, 37) 1px;
+
 
             a {
                 cursor: pointer;
@@ -58,7 +60,30 @@
                     z-index: -1;
                 }
 
+                &.selected {
+                    border-top-color: white;
+                    border-bottom-color: white;
+                    font-size: xx-large;
+                    color: white;
+                    background: rgba(255, 255, 255, 0.2);
+                    backdrop-filter: blur(10px);
+                    -webkit-backdrop-filter: blur(10px);
+                }
+
+
             }
         }
     }
+}
+
+h2 {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    height: fit-content;
+
 }
