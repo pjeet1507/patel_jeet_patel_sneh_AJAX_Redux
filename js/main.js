@@ -3,6 +3,7 @@
   const characters = document.querySelector("#characters");
   const movieBox = document.querySelector("#movieBox");
   const movieCon = document.querySelector("#movie-con");
+  const movieTemplate = document.querySelector("#movieTemplate"); // Add this line
   const baseUrl = "https://swapi.dev/api/people/?format=json";
 
   // functions
@@ -83,27 +84,21 @@
   }
 
   function createMovieElement(movie) {
-    const movieElement = document.createElement("div");
-    movieElement.className = "movie";
+    // Clone the template content using a new variable
+    const clonedTemplate = document.importNode(movieTemplate.content, true);
 
-    const movieTitle = document.createElement("h2");
-    movieTitle.className = "movie-heading";
+    // Find and populate elements within the cloned template
+    const movieTitle = clonedTemplate.querySelector(".movie-heading");
     movieTitle.textContent = movie["title"];
 
-    const movieImage = document.createElement("img");
-    movieImage.className = "poster-image";
+    const movieImage = clonedTemplate.querySelector(".poster-image");
     movieImage.src = `images/${movie["episode_id"]}.jpeg`;
-    movieImage.alt = movie["#title"];
+    movieImage.alt = movie.title;
 
-    const movieDescription = document.createElement("p");
-    movieDescription.className = "movie-description";
+    const movieDescription = clonedTemplate.querySelector(".movie-description");
     movieDescription.innerHTML = movie["opening_crawl"];
 
-    movieElement.appendChild(movieTitle);
-    movieElement.appendChild(movieImage);
-    movieElement.appendChild(movieDescription);
-
-    return movieElement;
+    return clonedTemplate;
   }
 
   getcharacters();
