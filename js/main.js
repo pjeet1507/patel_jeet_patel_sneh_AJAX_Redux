@@ -10,7 +10,7 @@
     fetch(`${baseUrl}`)
       .then((response) => response.json())
       .then(function (response) {
-        const results = response.results; //  assuming the API response has a 'results' property
+        const results = response.results;
         const ul = document.createElement("ul");
 
         results.forEach((character) => {
@@ -18,27 +18,40 @@
           const a = document.createElement("a");
           const img = document.createElement("img");
 
-          a.textContent = character.name; // replace with actual property names
+          a.textContent = character.name;
           a.dataset.movies = character.films;
 
-          img.src = `images/${character.name}.jpg`; // Example: 'Luke Skywalker' becomes 'lukeskywalker.jpeg'
+          img.src = `images/${character.name}.jpg`;
           img.alt = character.name;
-          img.className = "character-image"; // You can define a CSS class for styling
+          img.className = "character-image";
           a.appendChild(img);
           li.appendChild(a);
           ul.appendChild(li);
         });
 
-        characters.appendChild(ul); // append the list to the characters element
+        characters.appendChild(ul);
+        gsap.from("#characters ul li", {
+          duration: 0.2,
+          y: -50,
+          opacity: 0,
+          stagger: 0.1,
+        });
       })
+
+      // hightlight thing
       .then(function () {
         const links = document.querySelectorAll("#characters li a");
         links.forEach((link) => {
-          link.addEventListener("click", getMovies);
+          link.addEventListener("click", function (e) {
+            links.forEach((l) => l.classList.remove("selected"));
+            e.currentTarget.classList.add("selected");
+            getMovies(e);
+          });
         });
       })
+      // ----------------
       .catch((error) => {
-        console.error("Error fetching characters:", error);
+        console.error("something went wrong when getting character:", error);
       });
   }
 
@@ -52,9 +65,19 @@
         .then((filmDetail) => {
           const movieElement = createMovieElement(filmDetail);
           movieCon.appendChild(movieElement);
+
+          gsap.from(movieElement, {
+            duration: 0.7,
+            y: -100,
+            opacity: 0,
+            stagger: 0.1,
+          });
         })
         .catch((error) => {
-          console.error("Error fetching film details:", error);
+          console.error(
+            "something went wrong when getting film details:",
+            error
+          );
         });
     });
   }
