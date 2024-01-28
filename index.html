@@ -8,27 +8,31 @@
     <link href="css/main.css" rel="stylesheet" />
     <script
       defer
-      src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
     ></script>
+
     <script defer src="js/main.js"></script>
     <title>.:AJAX Redux:.</title>
   </head>
   <body>
     <main class="grid-con">
       <section class="col-span-full m-col-span-3" id="characters">
-        <h2 class="title">Characters</h2>
+        <h1 class="title">Characters</h1>
+        <div class="loading-indicator"></div>
       </section>
       <section class="col-span-full m-col-span-9" id="movieBox">
-        <h2>Movies</h2>
+        <h1>-----Movies-----</h1>
+        <div class="loading-indicator"></div>
         <section id="movie-con">
-           <template id="movieTemplate">
-          <div class="movie">
-            <h2 class="movie-heading"></h2>
-            <img class="poster-image" src="" alt="Movie Poster" />
-            <p class="movie-description"></p>
-           
-          </div>
-        </template>
+          <template id="movieTemplate">
+            <div class="movie">
+              <h2 class="movie-heading"></h2>
+              <div class="main-cont">
+                <img class="poster-image" src="" alt="Movie Poster" />
+                <p class="movie-description"></p>
+              </div>
+            </div>
+          </template>
         </section>
       </section>
     </main>
