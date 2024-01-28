@@ -1,3 +1,16 @@
+h1 {
+    font-size: 1.3em;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    height: fit-content;
+
+}
+
 #characters {
     padding: 10px;
     border: solid white 1px;
@@ -19,13 +32,18 @@
 
         li {
             padding: 10px;
-            font-size: x-large;
+            font-size: 1em;
             position: relative;
             border-bottom: solid rgb(37, 37, 37) 1px;
 
 
             a {
-                cursor: pointer;
+
+                img {
+                    height: 0%;
+                    width: 0%;
+                }
+
                 padding: 5px;
                 display: block;
                 text-decoration: none;
@@ -36,34 +54,11 @@
                 z-index: 2;
                 color: red;
 
-                &:hover {
-                    border-top-color: white;
-                    border-bottom-color: white;
-                    color: white;
-
-                    img {
-                        opacity: 1;
-                        transform: translate(-50%, -50%) scale(1);
-                    }
-                }
-
-
-                img {
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    opacity: 0;
-                    transform: translate(-50%, -50%) scale(0.5);
-                    transition: transform 250ms, opacity 250ms;
-                    pointer-events: none;
-                    width: min(40vw, 250px);
-                    z-index: -1;
-                }
-
                 &.selected {
                     border-top-color: white;
                     border-bottom-color: white;
-                    font-size: xx-large;
+                    font-size: 1.1em;
+                    ;
                     color: white;
                     background: rgba(255, 255, 255, 0.2);
                     backdrop-filter: blur(10px);
@@ -76,14 +71,54 @@
     }
 }
 
-h2 {
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    padding: 10px;
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    height: fit-content;
+@media screen and (min-width: 1080px) {
+
+    h1 {
+        font-size: 2.2em;
+    }
+
+    #characters {
+
+
+        ul {
+
+            li {
+                font-size: 1.5em;
+
+
+                a {
+                    cursor: pointer;
+
+                    &:hover {
+                        border-top-color: white;
+                        border-bottom-color: white;
+                        color: white;
+
+                        img {
+                            opacity: 1;
+                            transform: translate(-50%, -50%) scale(1);
+                        }
+                    }
+
+
+                    img {
+                        height: max-content;
+                        width: max-content;
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        opacity: 0;
+                        transform: translate(-50%, -50%) scale(0.5);
+                        transition: transform 250ms, opacity 250ms;
+                        pointer-events: none;
+                        width: min(40vw, 250px);
+                        z-index: -1;
+                    }
+
+
+                }
+            }
+        }
+    }
 
 }

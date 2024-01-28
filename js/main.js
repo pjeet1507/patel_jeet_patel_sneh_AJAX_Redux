@@ -1,16 +1,20 @@
 (() => {
-  // variables
   const characters = document.querySelector("#characters");
   const movieBox = document.querySelector("#movieBox");
   const movieCon = document.querySelector("#movie-con");
-  const movieTemplate = document.querySelector("#movieTemplate"); // Add this line
+  const movieTemplate = document.querySelector("#movieTemplate");
   const baseUrl = "https://swapi.dev/api/people/?format=json";
 
-  // functions
   function getcharacters() {
+    const loadingIndicator = document.querySelector(
+      "#characters .loading-indicator"
+    );
+    loadingIndicator.style.display = "block"; //loading
+
     fetch(`${baseUrl}`)
       .then((response) => response.json())
       .then(function (response) {
+        loadingIndicator.style.display = "none"; //loading
         const results = response.results;
         const ul = document.createElement("ul");
 
@@ -39,7 +43,6 @@
         });
       })
 
-      // hightlight thing
       .then(function () {
         const links = document.querySelectorAll("#characters li a");
         links.forEach((link) => {
@@ -50,44 +53,45 @@
           });
         });
       })
-      // ----------------
+
       .catch((error) => {
         console.error("something went wrong when getting character:", error);
+        loadingIndicator.style.display = "none"; // loading
       });
   }
 
   function getMovies(e) {
+    const loadingIndicator = document.querySelector(
+      "#movieBox .loading-indicator"
+    );
+    loadingIndicator.style.display = "block"; //loading
+
     const filmURLs = e.currentTarget.dataset.movies.split(",");
-    movieCon.innerHTML = ""; // Clear existing content
+    movieCon.innerHTML = "";
 
     filmURLs.forEach((filmUrl) => {
       fetch(filmUrl)
         .then((response) => response.json())
         .then((filmDetail) => {
+          if (filmUrl === filmURLs[filmURLs.length - 1]) {
+            loadingIndicator.style.display = "none"; // loading
+          }
           const movieElement = createMovieElement(filmDetail);
           movieCon.appendChild(movieElement);
-
-          gsap.from(movieElement, {
-            duration: 0.7,
-            y: -100,
-            opacity: 0,
-            stagger: 0.1,
-          });
         })
         .catch((error) => {
           console.error(
             "something went wrong when getting film details:",
             error
           );
+          loadingIndicator.style.display = "none"; //loading
         });
     });
   }
 
   function createMovieElement(movie) {
-    // Clone the template content using a new variable
     const clonedTemplate = document.importNode(movieTemplate.content, true);
 
-    // Find and populate elements within the cloned template
     const movieTitle = clonedTemplate.querySelector(".movie-heading");
     movieTitle.textContent = movie["title"];
 
@@ -102,5 +106,4 @@
   }
 
   getcharacters();
-  // eventListener
 })();
