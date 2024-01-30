@@ -1,5 +1,7 @@
 # patel_jeet_patel_sneh_AJAX_Redux
 
+![alt text](/images/readmeimg.png)
+
 AJAX Redux
 
 ## About
